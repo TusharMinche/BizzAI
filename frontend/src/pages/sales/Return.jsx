@@ -324,7 +324,7 @@ const Return = () => {
               Select Invoice
             </h2>
             {formData.selectedInvoice ? (
-              <div className="p-4 bg-indigo-50 rounded-lg">
+              <div className="p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium text-main">
@@ -451,7 +451,7 @@ const Return = () => {
                                 )
                               )
                             }
-                            className="w-20 px-2 py-1 border rounded"
+                            className="w-20 px-2 py-1 border border-default rounded bg-card text-main focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             min="0"
                             max={item.remainingQty}
                           />
@@ -468,7 +468,7 @@ const Return = () => {
                               // Clear reason when condition changes to prevent invalid combinations
                               updateItem(index, "reason", "");
                             }}
-                            className="w-32 px-2 py-1 border rounded"
+                            className="w-32 px-2 py-1 border border-default rounded bg-card text-main focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                           >
                             <option value="not_damaged">Not Damaged</option>
                             <option value="damaged">Damaged</option>
@@ -480,7 +480,7 @@ const Return = () => {
                             onChange={(e) =>
                               updateItem(index, "reason", e.target.value)
                             }
-                            className="w-40 px-2 py-1 border rounded"
+                            className="w-40 px-2 py-1 border border-default rounded bg-card text-main focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                           >
                             <option value="">Select reason</option>
                             {getReasonsForCondition(item.condition).map(
@@ -542,7 +542,7 @@ const Return = () => {
                       setFormData({ ...formData, notes: e.target.value })
                     }
                     rows="3"
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border border-default rounded-lg bg-card text-main focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="Add notes about the return..."
                   />
                 </div>
@@ -579,8 +579,8 @@ const Return = () => {
                 </span>
               </div>
             </div>
-            <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-6">
-              <p className="text-xs text-yellow-800">
+            <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg mb-6">
+              <p className="text-xs text-yellow-800 dark:text-yellow-200">
                 <strong>Note:</strong> This amount will be credited to the
                 customer's account or refunded via the selected method.
               </p>
@@ -606,7 +606,7 @@ const Return = () => {
 
       {/* Invoice Selection Modal */}
       {showInvoiceModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50   dark:bg-gray-700 p-4">
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-card rounded-xl shadow-xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
             <div className="p-6 border-b">
               <div className="flex items-center justify-between mb-4">
@@ -637,7 +637,7 @@ const Return = () => {
                 placeholder="Search by invoice number or customer name..."
                 value={searchInvoice}
                 onChange={(e) => setSearchInvoice(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border border-default rounded-lg bg-card text-main placeholder:text-muted focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
             <div className="overflow-y-auto max-h-96 p-6">
@@ -651,7 +651,7 @@ const Return = () => {
                     <div
                       key={invoice._id}
                       onClick={() => handleInvoiceSelect(invoice)}
-                      className="p-4 border rounded-lg hover:bg-indigo-50 hover:border-indigo-500 cursor-pointer transition"
+                      className="p-4 border border-default rounded-lg hover:bg-surface hover:border-indigo-500 cursor-pointer transition"
                     >
                       <div className="flex items-center justify-between">
                         <div>
