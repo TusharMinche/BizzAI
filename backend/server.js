@@ -34,7 +34,7 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  "http://localhost:5173",
+  "http://localhost:5174",
   process.env.FRONTEND_URL,      // production frontend
   /\.vercel\.app$/               // ✅ ALL Vercel preview URLs
 ];
