@@ -68,7 +68,7 @@ const InvoiceDetail = () => {
     const paidVia = invoice.paidViaMethod || invoice.paymentMethod;
 
     if (credit > 0 && paid === 0) return 'Customer Credit';
-    
+
     // If we have split payment details array, use it
     if (splitDetails.length > 1) {
       const methods = splitDetails.map(d => formatPaymentMethodLabel(d.method)).join(" + ");
@@ -77,7 +77,7 @@ const InvoiceDetail = () => {
       }
       return `Split (${methods})`;
     }
-    
+
     // Single split detail (shouldn't happen normally, but handle it)
     if (splitDetails.length === 1) {
       const method = formatPaymentMethodLabel(splitDetails[0].method);
@@ -86,7 +86,7 @@ const InvoiceDetail = () => {
       }
       return method;
     }
-    
+
     // Fallback to paidViaMethod logic (for backward compatibility)
     const primaryLabel = formatPaymentMethodLabel(paidVia);
     if (credit > 0 && paid > 0) return `Split (${primaryLabel} + Customer Credit)`;
@@ -176,6 +176,14 @@ const InvoiceDetail = () => {
           <div className="border-b dark:border-[rgb(var(--color-border))] pb-6 mb-6">
             <div className="flex justify-between items-start">
               <div>
+                {/* Shop Name */}
+                {invoice.createdBy?.shopName && (
+                  <div className="text-2xl font-bold text-gray-900 mb-1">{invoice.createdBy.shopName}</div>
+                )}
+                {/* GST Number */}
+                {invoice.createdBy?.gstNumber && (
+                  <div className="text-sm text-gray-500 mb-3">GSTIN: {invoice.createdBy.gstNumber}</div>
+                )}
                 <h2 className="text-3xl font-bold text-indigo-600 mb-2">INVOICE</h2>
                 <div className="text-lg font-semibold text-gray-900">{invoice.invoiceNo}</div>
               </div>
@@ -326,7 +334,7 @@ const InvoiceDetail = () => {
               {(() => {
                 const effectivePayment = invoice.paidAmount + (invoice.creditApplied || 0);
                 const balanceDue = invoice.totalAmount - effectivePayment;
-                
+
                 if (balanceDue > 0) {
                   return (
                     <div className="flex justify-between py-2">
@@ -360,6 +368,10 @@ const InvoiceDetail = () => {
 
           {/* Footer */}
           <div className="mt-12 pt-6 border-t text-center text-gray-500 text-sm">
+            {/* Shop Address */}
+            {invoice.createdBy?.shopAddress && (
+              <p className="text-gray-600 mb-4">{invoice.createdBy.shopAddress}</p>
+            )}
             <p>Thank you for your business!</p>
             <p className="mt-2">This is a computer-generated invoice.</p>
           </div>
